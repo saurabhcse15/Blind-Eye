@@ -168,11 +168,14 @@ def sample(request):
         img=base64.b64decode(data[22:])
         filename='./blog/static/sam.png'
         s='no'
+        l=10
         with open(filename,'wb') as f:
             f.write(img)
             s=Comp_vision(url)+face_api(url)
+            l=len(s.split())
             
-    return render(request, 'blog/audio.html', {'posts': s})
+            
+    return render(request, 'blog/audio.html', {'posts': s,'num':l})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
