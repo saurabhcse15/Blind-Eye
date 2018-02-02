@@ -172,7 +172,7 @@ def sample(request):
             f.write(img)
             s=Comp_vision(url)+face_api(url)
             
-    return HttpResponse('%s\n'%(s))
+    return render(request, 'blog/audio.html', {'posts': s})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
