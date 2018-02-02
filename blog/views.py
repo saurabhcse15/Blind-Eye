@@ -79,7 +79,7 @@ def parse2(list1):
             break;
     return desc         
 
-
+jsoo=''
 def Comp_vision(url_photo):
     headers = {
         'Content-Type': 'application/json',
@@ -104,7 +104,8 @@ def Comp_vision(url_photo):
         parsed = json.loads(data)
         return parse1(parsed)
         #print ("Response:")
-        #print (json.dumps(parsed, sort_keys=True, indent=2))
+        global jsoo
+        jsoo=json.dumps(parsed, sort_keys=True, indent=2))
         conn.close()
 
     except :
@@ -173,9 +174,9 @@ def sample(request):
             f.write(img)
             s=Comp_vision(url)+face_api(url)
             l=len(s.split())
+    global jsoo        
             
-            
-    return render(request, 'blog/audio.html', {'posts': s,'num':l})
+    return render(request, 'blog/audio.html', {'posts': s,''data':jsoo,'num':l})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
