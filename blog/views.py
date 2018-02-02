@@ -21,7 +21,7 @@ def sample(request):
         data= request.POST.get('photo1')
         cur_img=data
         img=base64.b64decode(data[22:])
-        filename='./codefundo/my-blog/blog/static/sam.png'
+        filename='./sam.png'
         s='no'
         with open(filename,'wb') as f:
             f.write(img)
