@@ -108,7 +108,7 @@ def Comp_vision(url_photo):
         conn.close()
 
     except :
-        return ''
+        return "sorry don't get any thing"
 
 ####################################
 def face_api(url_photo):
@@ -139,7 +139,7 @@ def face_api(url_photo):
         #print (json.dumps(parsed, sort_keys=True, indent=2))
         conn.close()
     except:
-        return ''    
+        return "sorry don't get any thing"    
  
 
 
