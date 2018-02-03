@@ -33,7 +33,8 @@
                         <option value="ar-EG">Arabic - EG</option>
                         <option value="zh-CN">Chinese - CN</option>
                         <option value="en-GB">English - GB</option>
-                        <option value="en-US" selected="selected">English - US</option>
+			<option value="en-IN" selected="selected">English - IN</option>
+                        <option value="en-US" >English - US</option>
                         <option value="fr-FR">French - FR</option>
                         <option value="de-DE">German - DE</option>
                         <option value="it-IT">Italian - IT</option>
@@ -50,7 +51,7 @@
                     <select id="recognitionMode">
                         <option value="Interactive">Interactive</option>
                         <option value="Conversation">Conversation</option>
-                        <option value="Dictation">Dictation</option>
+                        <option value="Dictation" selected>Dictation</option>
                     </select>
                 </td>
             </tr>
@@ -274,7 +275,7 @@
             formatOptions.addEventListener("change", Setup);
             recognitionMode.addEventListener("change", Setup);
 
-            startBtn.addEventListener("click", function () {
+            startbutton.addEventListener("click", function () {
                 if (key.value == "" || key.value == "YOUR_BING_SPEECH_API_KEY") {
                     alert("Please enter your Bing Speech subscription key!");
                     return;
