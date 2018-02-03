@@ -15,7 +15,6 @@ subscription_key1 = 'd5bac69b1ace45efb94ee361bc985749'
 subscription_key = 'aeead2d5d34548fe9fe2475a3190a187'
 
 uri_base = 'westcentralus.api.cognitive.microsoft.com'
-
 def check_emotion(dict1):
     i=0
     a=''
@@ -146,7 +145,6 @@ def face_api(url_photo):
 
 
 
-url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam.png'
 #print Comp_vision(url)
 
 #print face_api(url)
@@ -159,6 +157,7 @@ def post_list(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
 cur_img=''
+import random
 
 def sample(request):
     if request.method == 'POST':
@@ -167,11 +166,13 @@ def sample(request):
         data= request.POST.get('photo1')
         cur_img=data
         img=base64.b64decode(data[22:])
-        filename='./blog/static/sam.png'
+        p=random.randint(0, 5000)
+        filename='./blog/static/sam'+str(p)+'.png'
         s='no'
         l=10
         with open(filename,'wb') as f:
             f.write(img)
+            url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam'+str(p)+'.png'
             s=Comp_vision(url)+face_api(url)
             l=len(s.split())
     global jsoo        
