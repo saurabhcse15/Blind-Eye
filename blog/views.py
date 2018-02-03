@@ -15,6 +15,92 @@ subscription_key1 = 'd5bac69b1ace45efb94ee361bc985749'
 subscription_key = 'aeead2d5d34548fe9fe2475a3190a187'
 
 uri_base = 'westcentralus.api.cognitive.microsoft.com'
+
+
+def write_1(a,b):
+    f=open("./data.txt",'a')
+    f.write(a+' '+b+'\n')
+    f.close()
+
+FaceList={}
+def read_1():
+    f2=open("./data.txt","r")
+    for l in f2:
+        b=l.strip().split()
+        try:
+            FaceList[b[0]]=b[1]
+        except:
+            pass
+
+
+def add_in_list(url_photo,a): 
+    headers = {
+        # Request headers
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': 'aeead2d5d34548fe9fe2475a3190a187',
+    }
+
+
+    params = urllib.urlencode({
+
+    })
+    key_p=''
+    try:
+        conn = httplib.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
+        conn.request("POST", "/face/v1.0/facelists/first_list/persistedFaces?%s" % params, "{ 'url': '" +url_photo+"' }", headers)
+        response = conn.getresponse()
+        data = response.read()
+        parsed = json.loads(data)
+        try:
+            key_p=parsed["persistedFaceId"]
+        except:
+            pass    
+        conn.close()
+    except Exception as e:
+        print("[Errno {0}] {1}".format(e.errno, e.strerror)) 
+    if key_p :    
+        write_1(key_p,a)
+        read_1()
+
+
+def find_face(fac_id):
+    headers = {
+        # Request headers
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': 'aeead2d5d34548fe9fe2475a3190a187',
+    }
+
+    params = urllib.urlencode({
+    })
+    body="""{    
+        "faceId": " """ +fac_id+""" ",
+        "faceListId":"first_list",  
+        "maxNumOfCandidatesReturned":5,
+        "mode": "matchPerson"
+    }"""
+
+   
+    conn = httplib.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
+    conn.request("POST", "/face/v1.0/findsimilars?%s" % params, body, headers)
+    response = conn.getresponse()
+    data = response.read()
+    parsed = json.loads(data)
+    ans=''
+    try:
+        l=len(parsed)
+        read_1()
+        for i in xrange(0,l):
+            if parsed[i]["persistedFaceId"] in FaceList.keys():
+                if parsed[i]["confidence"] > 0.40 :
+                    ans=FaceList[parsed[i]["persistedFaceId"]]
+                break
+    except:
+        pass 
+    conn.close()
+    return ans
+
+
+
 def check_emotion(dict1):
     i=0
     a=''
@@ -36,6 +122,7 @@ def parse1( dict1):
         pass        
     return desc
 num={1:'first',2:'second',3:'third',4:'fourth',5:'fifth',6:'sixth',7:'seventh'}
+face_rec_list=[]
 
 def parse2(list1):
     num_people=len(list1)
@@ -69,6 +156,7 @@ def parse2(list1):
                 facialHair="bearded"
         except:
             pass
+        face_rec_list.append(list1[i]["faceId"])    
         his='her'    
         if gender == 'male':
             his="his"
@@ -134,10 +222,10 @@ def face_api(url_photo):
         data = response.read()  
         # 'data' contains the JSON data. The following formats the JSON data for display.
         parsed = json.loads(data)
-        return parse2(parsed)
         #print ("Response:")
         #print (json.dumps(parsed, sort_keys=True, indent=2))
         conn.close()
+        return parse2(parsed)
     except:
         return "sorry don't get any thing"    
  
@@ -159,10 +247,14 @@ def post_list(request):
 cur_img=''
 import random
 
+def decoder_(s):
+    return s
+
+
 def sample(request):
     if request.method == 'POST':
         global cur_img
-
+        is_save=request.POST.get('save1')
         data= request.POST.get('photo1')
         cur_img=data
         img=base64.b64decode(data[22:])
@@ -170,13 +262,20 @@ def sample(request):
         filename='./blog/static/sam'+str(p)+'.png'
         s='no'
         l=10
+        url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam'+str(p)+'.png'
         with open(filename,'wb') as f:
             f.write(img)
-            url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam'+str(p)+'.png'
             s=Comp_vision(url)+" "+face_api(url)
             l=len(s.split())        
-            
-    return render(request, 'blog/audio.html', {'posts': s,'num':l})
+        p=decoder_(is_save)
+        if p!='NO':
+            add_in_list(url,p)  
+        names=''    
+        l=(face_rec_list) 
+        for i in xrange(l):
+            names=names+" "+find_face(face_rec_list[i])
+
+    return render(request, 'blog/audio.html', {'posts': s,'num':l,'name':names})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
