@@ -250,9 +250,20 @@ cur_img=''
 import random
 
 def decoder_(s):
-    if s == '':
-        return "NO"
-    return s
+    json_=s.split('+')
+    l=len(json_)
+    list2=[]
+    for i in xrange(l):
+        parsed=json.loads(json_[i])
+        list2.append(parsed["DisplayText"])
+    l=len(list2)
+    found1='NO'
+    for i in xrange(l):
+        cur_text= list2[i].split()
+        if "save" in cur_text and "image" in cur_text and len(cur_text) > 3:
+            found1=cur_text[3]
+            break
+    return found1
 
 
 def sample(request):
@@ -262,6 +273,7 @@ def sample(request):
     if request.method == 'POST':
         global cur_img
         is_save=request.POST.get('save1')
+        json_=request.POST.get('save2')
         data= request.POST.get('photo1')
         cur_img=data
         img=base64.b64decode(data[22:])
@@ -274,7 +286,7 @@ def sample(request):
             f.write(img)
             s=Comp_vision(url)+" "+face_api(url)
             l=len(s.split())        
-        p=decoder_(is_save)
+        p=decoder_(json_)
         if p!='NO':
             add_in_list(url,p)  
         names=''    
