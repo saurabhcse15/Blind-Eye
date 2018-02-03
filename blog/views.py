@@ -97,6 +97,8 @@ def find_face(fac_id):
     except:
         pass 
     conn.close()
+    if ans=='':
+        ans='stranger'
     return ans
 
 
@@ -256,6 +258,7 @@ def decoder_(s):
 def sample(request):
     s=''
     l=0
+    names=''
     if request.method == 'POST':
         global cur_img
         is_save=request.POST.get('save1')
