@@ -278,6 +278,7 @@ def sample(request):
         for i in xrange(l1):
             names=names+" "+find_face(face_rec_list[i])+ " and "
         names=names[:-4]+" is here."
+        face_rec_list=[]
         s=s+names
 
     return render(request, 'blog/audio.html', {'posts': s,'num':l,'name':names})
