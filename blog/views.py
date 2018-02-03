@@ -255,6 +255,7 @@ def decoder_(s):
 
 def sample(request):
     s=''
+    l=0
     if request.method == 'POST':
         global cur_img
         is_save=request.POST.get('save1')
