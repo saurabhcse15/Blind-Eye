@@ -248,6 +248,8 @@ cur_img=''
 import random
 
 def decoder_(s):
+    if s == '':
+        return "NO"
     return s
 
 
