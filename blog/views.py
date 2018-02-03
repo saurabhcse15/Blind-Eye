@@ -104,7 +104,7 @@ def Comp_vision(url_photo):
         return parse1(parsed)
         #print ("Response:")
         global jsoo
-        jsoo=json.dumps(parsed, sort_keys=True, indent=2))
+        #json.dumps(parsed, sort_keys=True, indent=2))
         conn.close()
 
     except :
@@ -174,10 +174,9 @@ def sample(request):
             f.write(img)
             url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam'+str(p)+'.png'
             s=Comp_vision(url)+face_api(url)
-            l=len(s.split())
-    global jsoo        
+            l=len(s.split())        
             
-    return render(request, 'blog/audio.html', {'posts': s,''data':jsoo,'num':l})
+    return render(request, 'blog/audio.html', {'posts': s,'num':l})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
