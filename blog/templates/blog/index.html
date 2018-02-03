@@ -359,6 +359,7 @@
         function UpdateRecognizedPhrase(json) {
             hypothesisDiv.innerHTML = "";
             phraseDiv.innerHTML += json + "\n";
+		save1.innerHTML += json['DisplayText'] + "\n"
         }
 
         function OnComplete() {
@@ -516,7 +517,7 @@ makeblob = function (dataURL) {
     <form method="post" action="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/sample">
         {% csrf_token %}
         <input type="hidden" name="photo1" id="photo1">
-	<input type="text" name="save1" id="save1" >    
+	<textarea type="text" name="save1" id="save1" >    </textarea>
         <br>
         <input type="submit">
     </form>
