@@ -273,9 +273,11 @@ def sample(request):
         if p!='NO':
             add_in_list(url,p)  
         names=''    
-        l=len(face_rec_list) 
-        for i in xrange(l):
-            names=names+" "+find_face(face_rec_list[i])
+        l1=len(face_rec_list) 
+        for i in xrange(l1):
+            names=names+" "+find_face(face_rec_list[i])+ " and "
+        names=names+" is standing."
+        s=s+names
 
     return render(request, 'blog/audio.html', {'posts': s,'num':l,'name':names})
 
