@@ -45,8 +45,8 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="hidden" id="startBtn" disabled="disabled">
-                    <input type="hidden" id="stopBtn" disabled="disabled">
+                    <button id="startBtn" disabled="disabled">Start</button>
+                    <button id="stopBtn" disabled="disabled">Stop</button>
                     <input type="file" id="filePicker" accept=".wav" style="display:none"/>
                 </td>
             </tr>
@@ -244,7 +244,7 @@
             formatOptions.addEventListener("change", Setup);
             recognitionMode.addEventListener("change", Setup);
 
-            //startBtn.addEventListener("click", function () {
+            startBtn.addEventListener("click", function () {
                 if (key.value == "" || key.value == "YOUR_BING_SPEECH_API_KEY") {
                     alert("Please enter your Bing Speech subscription key!");
                     return;
@@ -263,7 +263,7 @@
                     startBtn.disabled = true;
                     stopBtn.disabled = false;
                 }                
-            //});
+            });
 
             key.addEventListener("focus", function () {
                if (key.value == "YOUR_BING_SPEECH_API_KEY") {
