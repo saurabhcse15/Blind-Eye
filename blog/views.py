@@ -249,18 +249,26 @@ def post_list(request):
 cur_img=''
 import random
 
+def strr(s):
+    l=len(s)
+    p=''
+    for i in xrange(l):
+        if s[i] != '\r' and s[i] != '\n':
+            p=p+s[i]
+    return p
+
 def decoder_(s):
-    json_=s.split('?')
+    json_=strr(s).split('?')
     l=len(json_)
     list2=[]
-    for i in xrange(l):
+    for i in xrange(l-1):
         parsed=json.loads(json_[i])
-        list2.append(str(parsed["DisplayText"]).lower())
+        list2.append(parsed["DisplayText"].lower())
     l=len(list2)
     found1='NO'
     for i in xrange(l):
         cur_text= list2[i].split()
-        if ("save" in cur_text) and ( ("image" or "images") in cur_text) and (len(cur_text) > 3):
+        if "save" in cur_text and ( ("image" or "images") in cur_text ) and len(cur_text) > 3:
             found1=cur_text[3]
             break
     return found1
