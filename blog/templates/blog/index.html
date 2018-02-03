@@ -219,10 +219,10 @@
                         console.log(JSON.stringify(event.Result)); // check console for other information in result
                         break;
                     case "SpeechSimplePhraseEvent" :
-                        UpdateRecognizedPhrase(JSON);
+                        UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
                         break;
                     case "SpeechDetailedPhraseEvent" :
-                        UpdateRecognizedPhrase(JSON);
+                        UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
                         break;
                     case "RecognitionEndedEvent" :
                         OnComplete();
@@ -358,8 +358,8 @@
 
         function UpdateRecognizedPhrase(json) {
             hypothesisDiv.innerHTML = "";
-            phraseDiv.innerHTML += JSON.stringify(event.Result, null, 3) + "\n";
-		save1.innerHTML += string(json['DisplayText'])  + "+";
+            phraseDiv.innerHTML += json + "\n";
+		save1.innerHTML += json['DisplayText'] + "\n";
         }
 
         function OnComplete() {
