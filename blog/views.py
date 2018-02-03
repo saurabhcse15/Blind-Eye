@@ -274,6 +274,7 @@ def sample(request):
         if p!='NO':
             add_in_list(url,p)  
         names=''    
+        global face_rec_list
         l1=len(face_rec_list) 
         for i in xrange(l1):
             names=names+" "+find_face(face_rec_list[i])+ " and "
