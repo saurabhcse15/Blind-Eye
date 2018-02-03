@@ -173,7 +173,7 @@ def sample(request):
         with open(filename,'wb') as f:
             f.write(img)
             url='http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/static/sam'+str(p)+'.png'
-            s=Comp_vision(url)+face_api(url)
+            s=Comp_vision(url)+" '+face_api(url)
             l=len(s.split())        
             
     return render(request, 'blog/audio.html', {'posts': s,'num':l})
