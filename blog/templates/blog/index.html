@@ -343,7 +343,7 @@
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
 
-  var width = 480;    // We will scale the photo width to this
+  var width = 600;    // We will scale the photo width to this
   var height = 0;     // This will be computed based on the input stream
 
   // |streaming| indicates whether or not we're currently streaming
@@ -487,7 +487,7 @@ makeblob = function (dataURL) {
 		</tr>
 		<tr width="100%">
 		<td width="100%">
-		    <button id="startbutton" style="width:250px;height:50px;">Take photo</button>
+		    <button id="startbutton" style="width:350px;height:100px;">Take photo</button>
 		</td>
 		</tr>
 	</table>
@@ -499,13 +499,13 @@ makeblob = function (dataURL) {
 		    <form method="post" action="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/sample" width="100%">
 			{% csrf_token %}
 			<input type="hidden" name="photo1" id="photo1">
-			<input type="hidden" name="save1" id="save1" rows="20" col="40">    
-			<textarea type="text" name="save2" id="save2" rows="20" col="20">   </textarea>
+			<input type="hidden" name="save1" id="save1" >    
+			<textarea type="text" name="save2" id="save2" rows="20" col="40">   </textarea>
 		</td>
 		</tr>
 		<tr width="100%">
 		<td width="100%">
-			<input type="submit" style="width:250px;height:50px;">
+			<input type="submit" style="width:350px;height:100px;">
 		    </form>
 		</td>
 		</tr>
