@@ -5,8 +5,16 @@
 </head>
 <body>
 	<script>
+	function myFunction() {
+		    window.location.href="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087";
+		}
+	var time = parseInt({{ num }});
+	setTimeout(myFunction, time +4000);
 	responsiveVoice.speak('{{ posts }}');
+	
+	
 	</script>
-	{{ posts }} {{ num }} {{ name }}
+	{{ posts }} 
+	
 </body>
 </html>
