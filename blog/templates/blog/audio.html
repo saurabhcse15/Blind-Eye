@@ -8,7 +8,7 @@
 	function myFunction() {
 		    window.location.href="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087";
 		}
-	var time = parseInt({{ num }});
+	var time = parseInt({{ num }})*1000;
 	setTimeout(myFunction, time +4000);
 	responsiveVoice.speak('{{ posts }}');
 	
