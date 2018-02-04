@@ -343,7 +343,7 @@
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
 
-  var width = 320;    // We will scale the photo width to this
+  var width = 480;    // We will scale the photo width to this
   var height = 0;     // This will be computed based on the input stream
 
   // |streaming| indicates whether or not we're currently streaming
@@ -480,14 +480,14 @@ makeblob = function (dataURL) {
 	<table width="50%">
 		<tr width="100%">
 		<td width="100%">	
-		  <div class="camera">
+		  <div class="camera" width="100%">
 		    
 		<video autoplay="true" id="video">Video stream not available.</video>
 		</td>
 		</tr>
 		<tr width="100%">
 		<td width="100%">
-		    <button id="startbutton">Take photo</button>
+		    <button id="startbutton" style="width:250px;height:50px;">Take photo</button>
 		</td>
 		</tr>
 	</table>
@@ -496,13 +496,16 @@ makeblob = function (dataURL) {
 	<table width="50%">
 		<tr width="100%">
 		<td width="100%">
-		    <form method="post" action="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/sample">
+		    <form method="post" action="http://ec2-52-39-175-212.us-west-2.compute.amazonaws.com:8087/sample" width="100%">
 			{% csrf_token %}
 			<input type="hidden" name="photo1" id="photo1">
-			<input type="hidden" name="save1" id="save1" rows="20" col="10">    
-			<textarea type="text" name="save2" id="save2" rows="20" col="10">   </textarea>
-		
-			<input type="submit">
+			<input type="hidden" name="save1" id="save1" rows="20" col="40">    
+			<textarea type="text" name="save2" id="save2" rows="20" col="20">   </textarea>
+		</td>
+		</tr>
+		<tr width="100%">
+		<td width="100%">
+			<input type="submit" style="width:250px;height:50px;">
 		    </form>
 		</td>
 		</tr>
@@ -511,15 +514,11 @@ makeblob = function (dataURL) {
 </tr>
 </table>
 		  </div>
-		  <canvas id="canvas">hello
+		  <canvas id="canvas">
 		  </canvas>
 		  <div class="output">
 		    <img id="photo" alt="The screen capture will appear in this box.">
-		  </div>
-			<p>
-				Visit our article <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos"> Taking still photos with WebRTC</a> to learn more about the technologies used here.
-			</p>
-		</div>
+		  
 </body>
 </html>
 
