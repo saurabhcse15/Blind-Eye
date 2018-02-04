@@ -3,15 +3,22 @@
 <head>
 	<title>WebRTC: Still photo capture demo</title>
 	<base href="https://raw.githubusercontent.com/Azure-Samples/SpeechToText-WebSockets-Javascript/preview/samples/browser/Sample.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="main.css" type="text/css" media="all">
 
 
 </head>
 <body>
- 
-    <div id="content" style="display:none">
-        <table width="100%">
+ 	<div class="container" style="border:1px black solid;color:grey;">
+    		<h1>Blind's Eye</h1>      
+    		<p>&nbsp;&nbsp;&nbsp;&nbsp;-Helping People makes this world a better place.</p>    
+	</div>
+    <div id="content" style="display:none;margin:10px;">
+        <table width="100%" style="margin:50px;">
             <tr>
                 <td></td>
                 
@@ -473,10 +480,10 @@ makeblob = function (dataURL) {
 
 
 </script>
-<div class="contentarea">
+<div class="contentarea" style="margin-top:50px;">
 <table width="100%">
 <tr width="100%">
-<td width="50%">
+<td width="70%" align="center">
 	<table width="50%">
 		<tr width="100%">
 		<td width="100%">	
@@ -486,13 +493,13 @@ makeblob = function (dataURL) {
 		</td>
 		</tr>
 		<tr width="100%">
-		<td width="100%">
-		    <button id="startbutton" style="width:350px;height:100px;">Take photo</button>
+		<td width="100%" align="center">
+		    <button id="startbutton" style="width:350px;height:100px;" class="btn btn-primary">Take photo</button>
 		</td>
 		</tr>
 	</table>
 </td>
-<td width="50%">
+<td width="30%">
 	<table width="50%">
 		<tr width="100%">
 		<td width="100%">
@@ -500,12 +507,12 @@ makeblob = function (dataURL) {
 			{% csrf_token %}
 			<input type="hidden" name="photo1" id="photo1">
 			<input type="hidden" name="save1" id="save1" >    
-			<textarea type="text" name="save2" id="save2" rows="20" col="40">   </textarea>
+			<textarea type="text" name="save2" id="save2" rows="20" col="0" align="left" style="margin-left:20px;padding-left:0px;">   </textarea>
 		</td>
 		</tr>
 		<tr width="100%">
 		<td width="100%">
-			<input type="submit" style="width:350px;height:100px;">
+			<input type="submit" style="width:350px;height:100px;" class="btn btn-success">
 		    </form>
 		</td>
 		</tr>
